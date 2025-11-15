@@ -5,4 +5,5 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(C__Learning main.cpp
         Task1.cpp
+        Task1_1.cpp
 )
