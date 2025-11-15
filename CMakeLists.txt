@@ -12,4 +12,6 @@ add_executable(C__Learning main.cpp
         Task2_1.h
         Task2_3.cpp
         Task2_3.h
+        Task2_4.cpp
+        Task2_4.h
 )
