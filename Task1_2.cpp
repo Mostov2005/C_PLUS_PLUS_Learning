@@ -53,9 +53,12 @@ void Task1_2::run() {
 
     // 2. Заполнение из файла
     cout << "2. Заполнение из файла:\n";
-    ifstream fin("array.txt");
+    ifstream fin("Task1_2.txt");
     if (fin.is_open()) {
-        for (int i = 0; i < n; i++) fin >> dynamic1D[i];
+        for (int i = 0; i < n; i++) {
+            if (!(fin >> dynamic1D[i])) dynamic1D[i] = 0;
+            cout << "dynamic1D[" << i << "] = " << dynamic1D[i] << "\n";
+        }
         for (int i = 0; i < rows * cols; i++) fin >> block2D[i];
         for (int i = 0; i < rows; i++)
             for (int j = 0; j < cols; j++) fin >> dynamic2D[i][j];
