@@ -5,6 +5,7 @@
 #include "Task1_1.cpp"
 #include "Task1_2.h"
 #include "Task2_1.h"
+#include "Task2_3.h"
 
 
 int main() {
@@ -18,7 +19,10 @@ int main() {
     // Task1_2 t1_2;
     // t1_2.run();
 
-    Task2_1 t2_1;
-    t2_1.run();
+    // Task2_1 t2_1;
+    // t2_1.run();
+
+    Task2_3 t2_3;
+    t2_3.run();
     return 0;
 }
