@@ -58,7 +58,7 @@ public:
 
         string str = "Hello";
         cout << "std::string: \"" << str << "\", длина = " << str.size()
-                << ", capacity = " << str.capacity()
+                << ", capacity = " << str.capacity() // Сколько памяти выделено
                 << ", адрес в памяти = " << static_cast<const void *>(str.c_str()) << "\n";
     }
 };

@@ -25,7 +25,7 @@ void Task1_2::run() {
     cout << "Динамический 1D: ";
     for (int i = 0; i < n; i++) cout << dynamic1D[i] << " ";
     cout << "\nАдреса: ";
-    for (int i = 0; i < n; i++) cout << (dynamic1D + i) << " ";
+    for (int i = 0; i < n; i++) cout << &dynamic1D[i] << " ";
     cout << "\n";
 
     // Двумерный как единый блок
