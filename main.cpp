@@ -28,10 +28,10 @@ int main() {
     // Task2_3 t2_3;
     // t2_3.run();
 
-    // Task2_4 t2_4;
-    // t2_4.run();
+    Task2_4 t2_4;
+    t2_4.run();
 
-    Task3_3 t3_3;
-    t3_3.run();
+    // Task3_3 t3_3;
+    // t3_3.run();
     return 0;
 }
