@@ -9,7 +9,7 @@
 #include "Task2_4.h"
 #include "Task3_3.h"
 #include "Task4_1.h"
-
+#include "Task4_2.h"
 
 
 
@@ -36,7 +36,10 @@ int main() {
     // Task3_3 t3_3;
     // t3_3.run();
 
-    Task4_1 t4_1;
-    t4_1.run();
+    // Task4_1 t4_1;
+    // t4_1.run();
+
+    Task4_2 t4_2;
+    t4_2.run();
     return 0;
 }
