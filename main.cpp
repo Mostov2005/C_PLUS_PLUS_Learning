@@ -8,13 +8,15 @@
 #include "Task2_3.h"
 #include "Task2_4.h"
 #include "Task3_3.h"
+#include "Task4_1.h"
+
 
 
 
 int main() {
     SetConsoleOutputCP(CP_UTF8);
-    Task1 t1;
-    t1.run();
+    // Task1 t1;
+    // t1.run();
 
     // Task1_1 t1_1;
     // t1_1.run();
@@ -33,5 +35,8 @@ int main() {
 
     // Task3_3 t3_3;
     // t3_3.run();
+
+    Task4_1 t4_1;
+    t4_1.run();
     return 0;
 }
