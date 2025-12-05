@@ -53,7 +53,6 @@ public:
         cout << "Попытка выйти за пределы: " << *(arr2 + 3) << endl;
 
 
-        // дальше разбираться
         cout << "\n4. Изменение по байтам\n";
         int num = 0x12345678;
         unsigned char *b = reinterpret_cast<unsigned char *>(&num);
@@ -112,7 +111,7 @@ public:
 
         // 7d. Память для массива и выход за границы
         int* arrExp = new int[3]{1,2,3};
-        cout << "arrExp[3] (выход за пределы, UB!) = " << *(arrExp + 3) << endl;
+        cout << "arrExp[3] выход за пределы = " << *(arrExp + 3) << endl;
         delete[] arrExp;
     }
 };

@@ -47,7 +47,7 @@ void Task3_3::run() {
 
     // г) расположить в порядке возрастания координаты x, не меняя порядок точек с одинаковой x
     stable_sort(points.begin(), points.end(),
-                [](const pair<int, int> &a, const pair<int, int> &b) { return a.first < b.first; });
+                [](const pair<int, int> &a, const pair<int, int> &b) { return a.first < b.first;});
     cout << "Точки, отсортированные по x:\n";
     for (auto &p: points)
         cout << "(" << p.first << "," << p.second << ") ";

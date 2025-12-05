@@ -27,7 +27,7 @@ Cargo::Cargo(Cargo &&other) noexcept : weight(other.weight) {
     cout << "Конструктор перемещения\n";
 }
 
-// Копирующий оператор присваивания
+// Оператор копирующего присваивания
 Cargo &Cargo::operator=(const Cargo &other) {
     cout << "Оператор копирующего присваивания\n";
     if (this != &other) {
@@ -90,5 +90,4 @@ void Task4_1::run() {
     cout << "Вес объекта f = " << f.getWeight() << "\n";
 
     cout << "\n" << endl;
-
 }
