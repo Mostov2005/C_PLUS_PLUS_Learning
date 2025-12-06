@@ -11,24 +11,16 @@
 #include "Task4_1.h"
 #include "Task4_2.h"
 #include "Task4_3.cpp"
-
+#include "Task4_4.cpp"
+#include "Task4_5.cpp"
 
 int main() {
     SetConsoleOutputCP(CP_UTF8);
     // Task1 t1;
     // t1.run();
 
-    // Task1_1 t1_1;
-    // t1_1.run();
-    //
-    // Task1_2 t1_2;
-    // t1_2.run();
-    //
     // Task2_1 t2_1;
     // t2_1.run();
-    //
-    // Task2_3 t2_3;
-    // t2_3.run();
 
     // Task2_4 t2_4;
     // t2_4.run();
@@ -44,5 +36,12 @@ int main() {
 
     Task4_3 t4_3;
     t4_3.run();
+
+    // Task4_4 t4_4;
+    // t4_4.run();
+
+    // Task4_5 t4_5;
+    // t4_5.run();
+
     return 0;
 }
