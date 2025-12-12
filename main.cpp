@@ -13,35 +13,29 @@
 #include "Task4_3.cpp"
 #include "Task4_4.cpp"
 #include "Task4_5.cpp"
+#include "Task5_2.cpp"
+#include "Task5_2_smart.cpp"
+#include "Task5_3.cpp"
+
+
 
 int main() {
     SetConsoleOutputCP(CP_UTF8);
     // Task1 t1;
     // t1.run();
 
-    // Task2_1 t2_1;
-    // t2_1.run();
-
-    // Task2_4 t2_4;
-    // t2_4.run();
-
-    // Task3_3 t3_3;
-    // t3_3.run();
-    //
-    // Task4_1 t4_1;
-    // t4_1.run();
-
-    // Task4_2 t4_2;
-    // t4_2.run();
-
-    Task4_3 t4_3;
-    t4_3.run();
-
-    // Task4_4 t4_4;
-    // t4_4.run();
 
     // Task4_5 t4_5;
     // t4_5.run();
+
+    // Task5_2 t5_2;
+    // return t5_2.run();
+
+    // Task5_2_smart t5_2_smart;
+    // return t5_2_smart.run();
+
+    Task5_3 t5_3;
+    return t5_3.run();
 
     return 0;
 }
