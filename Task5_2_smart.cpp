@@ -9,30 +9,31 @@ using namespace std;
 template<typename T>
 class Vector_smart {
 private:
-    unique_ptr<T[]> data_; // умный указатель на массив
-    size_t size_; // текущий размер
-    size_t cap_; // вместимость
+    unique_ptr<T[]> data_;
+    size_t size_;
+    size_t cap_;
 
-    // Увеличение capacity ×2
+    // Увеличивает вместимость вектора в 2 раза при нехватке памяти
     void grow_if_needed() {
         size_t newCap = (cap_ == 0 ? 1 : cap_ * 2);
         reserve(newCap);
     }
 
 public:
-    // --- Конструкторы ---
-
+    // Конструктор по умолчанию
     Vector_smart() : data_(nullptr), size_(0), cap_(0) {
     }
 
+    // Конструктор с размером и значением по умолчанию
     explicit Vector_smart(size_t n) : data_(nullptr), size_(0), cap_(0) {
         if (n == 0) return;
         data_ = make_unique<T[]>(n);
         for (size_t i = 0; i < n; ++i)
-            data_[i] = T(); // инициализация значением по умолчанию
+            data_[i] = T();
         size_ = cap_ = n;
     }
 
+    // Конструктор с размером и значением
     Vector_smart(size_t n, const T &value) {
         data_ = make_unique<T[]>(n);
         for (size_t i = 0; i < n; ++i)
@@ -40,7 +41,7 @@ public:
         size_ = cap_ = n;
     }
 
-    // Копирование
+    // Конструктор копирования
     Vector_smart(const Vector_smart &other) : size_(other.size_), cap_(other.cap_) {
         if (cap_ == 0) return;
         data_ = make_unique<T[]>(cap_);
@@ -48,46 +49,51 @@ public:
             data_[i] = other.data_[i];
     }
 
-    // Перемещение
+    // Конструктор перемещения
     Vector_smart(Vector_smart &&other) noexcept = default;
 
-    // Присваивание (copy-and-swap)
+    // Оператор присваивания
     Vector_smart &operator=(Vector_smart other) noexcept {
         swap(other);
         return *this;
     }
 
-    // --- Методы доступа ---
-
     T &operator[](size_t idx) noexcept { return data_[idx]; }
+
     const T &operator[](size_t idx) const noexcept { return data_[idx]; }
 
     T &at(size_t idx) {
-        if (idx >= size_) throw out_of_range("Vector::at: index out of range");
+        if (idx >= size_) throw out_of_range("Выход за гнаницы!");
         return data_[idx];
     }
 
     const T &at(size_t idx) const {
-        if (idx >= size_) throw out_of_range("Vector::at: index out of range");
+        if (idx >= size_) throw out_of_range("Выход за гнаницы!");
         return data_[idx];
     }
 
+    // Возвращает текущее количество элементов
     size_t size() const noexcept { return size_; }
+
+    // Возвращает текущую вместимость вектора
     size_t capacity() const noexcept { return cap_; }
+
+    // Проверяет, пуст ли вектор
     bool empty() const noexcept { return size_ == 0; }
 
-    // --- Модификаторы ---
-
+    // Добавление элемента в конец вектора
     void push_back(const T &value) {
         if (size_ == cap_) grow_if_needed();
         data_[size_++] = value;
     }
 
+    // Добавление элемента в конец вектора с использованием перемещения
     void push_back(T &&value) {
         if (size_ == cap_) grow_if_needed();
         data_[size_++] = std::move(value);
     }
 
+    // Создаёт элемент на месте в конце вектора из переданных аргументов
     template<typename... Args>
     void emplace_back(Args &&... args) {
         if (size_ == cap_) grow_if_needed();
@@ -95,19 +101,21 @@ public:
         size_++;
     }
 
+    // Удаляет последний элемент вектора
     void pop_back() {
         if (size_ > 0) size_--;
     }
 
+    // Удаляет все элементы, не освобождая память
     void clear() noexcept {
         size_ = 0;
     }
 
+    // Резервирует память под newCap элементов
     void reserve(size_t newCap) {
         if (newCap <= cap_) return;
 
         unique_ptr<T[]> newData = make_unique<T[]>(newCap);
-
         for (size_t i = 0; i < size_; ++i)
             newData[i] = std::move_if_noexcept(data_[i]);
 
@@ -115,6 +123,7 @@ public:
         cap_ = newCap;
     }
 
+    // Меняет местами содержимое двух векторов
     void swap(Vector_smart &other) noexcept {
         std::swap(data_, other.data_);
         std::swap(size_, other.size_);
@@ -122,12 +131,10 @@ public:
     }
 };
 
-
 class Task5_2_smart {
 public:
     int run() {
-        cout << "Vector_smart<T> с умными указателями\n\n";
-
+        cout << "\n\nЗадание 5.2 Свой вектор (Умные указатели)\n\n";
         Vector_smart<int> v;
         cout << "После default ctor: size=" << v.size() << " cap=" << v.capacity() << "\n";
 
@@ -144,7 +151,8 @@ public:
         cout << "После pop_back(): size=" << v.size() << " cap=" << v.capacity() << "\n\n";
 
         v.emplace_back(777);
-        cout << "После emplace_back(777): back=" << v[v.size() - 1] << " size=" << v.size() << "\n\n";
+        cout << "После emplace_back(777): back=" << v[v.size() - 1]
+             << " size=" << v.size() << "\n\n";
 
         Vector_smart<int> a(3, 5);
         cout << "a: size=" << a.size() << " cap=" << a.capacity() << "\n";

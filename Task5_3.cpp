@@ -1,8 +1,9 @@
 #include <iostream>
+#include <stdexcept>
 
 using namespace std;
 
-// ================= Односвязный список =================
+// Односвязный список
 template<typename T>
 class List {
 private:
@@ -15,11 +16,8 @@ private:
 
 public:
     List() : head(nullptr) {}
-    ~List() {
-        clear();
-    }
+    ~List() { clear(); }
 
-    // Добавление в конец
     void push_back(const T& val) {
         Node* node = new Node(val);
         if (!head) {
@@ -31,7 +29,28 @@ public:
         }
     }
 
-    // Очистка
+    void pop_back() {
+        if (!head) return;
+        if (!head->next) {
+            delete head;
+            head = nullptr;
+            return;
+        }
+        Node* cur = head;
+        while (cur->next->next) cur = cur->next;
+        delete cur->next;
+        cur->next = nullptr;
+    }
+
+    T& back() {
+        if (!head) throw runtime_error("List пуст");
+        Node* cur = head;
+        while (cur->next) cur = cur->next;
+        return cur->value;
+    }
+
+    bool empty() const { return head == nullptr; }
+
     void clear() {
         Node* cur = head;
         while (cur) {
@@ -42,7 +61,6 @@ public:
         head = nullptr;
     }
 
-    // Пройтись и показать
     void print() const {
         Node* cur = head;
         while (cur) {
@@ -52,116 +70,58 @@ public:
         cout << "\n";
     }
 
-    // Вставить элемент x после каждого y
-    void insertAfterEach(const T& y, const T& x) {
-        Node* cur = head;
-        while (cur) {
-            if (cur->value == y) {
-                Node* node = new Node(x);
-                node->next = cur->next;
-                cur->next = node;
-                cur = node->next; // пропустить вставленный
-            } else {
-                cur = cur->next;
-            }
-        }
-    }
-
-    // Доступ к голове
     Node* getHead() { return head; }
 };
 
-// ================= Стек на основе списка =================
+// Стек на основе списка
 template<typename T>
 class Stack {
 private:
-    struct Node {
-        T value;
-        Node* next;
-        Node(const T& val, Node* nxt) : value(val), next(nxt) {}
-    };
-    Node* topNode;
+    List<T> list;
 
 public:
-    Stack() : topNode(nullptr) {}
-    ~Stack() {
-        while (!empty()) pop();
-    }
-
-    void push(const T& val) {
-        topNode = new Node(val, topNode);
-    }
+    void push(const T& val) { list.push_back(val); }
 
     void pop() {
-        if (!topNode) return;
-        Node* tmp = topNode;
-        topNode = topNode->next;
-        delete tmp;
+        if (!list.empty()) list.pop_back();
     }
 
-    T& top() { return topNode->value; }
-    bool empty() const { return topNode == nullptr; }
+    T& top() {
+        return list.back();
+    }
 
-    // Вставить x после каждого y (внешняя функция)
+    bool empty() const {
+        return list.empty();
+    }
+
+    void print() const {
+        list.print();
+    }
+
+    // Вставить x после каждого y
     void insertAfterEach(const T& y, const T& x) {
-        Stack<T> tmpStack;
-
-        // Переносим элементы во временный стек
+        List<T> tmp;
+        // переносим элементы из стека во временный список в обратном порядке
         while (!empty()) {
-            T val = top();
+            tmp.push_back(top());
             pop();
-            tmpStack.push(val);
         }
 
-        // Восстанавливаем стек с вставкой
-        while (!tmpStack.empty()) {
-            T val = tmpStack.top();
-            tmpStack.pop();
+        // восстанавливаем стек, вставляя x после каждого y
+        while (!tmp.empty()) {
+            T val = tmp.back();
+            tmp.pop_back();
             push(val);
             if (val == y) push(x);
         }
-    }
-
-    // Печать (для демонстрации)
-    void print() {
-        Stack<T> tmpStack;
-        while (!empty()) {
-            T val = top();
-            pop();
-            tmpStack.push(val);
-        }
-
-        while (!tmpStack.empty()) {
-            T val = tmpStack.top();
-            tmpStack.pop();
-            cout << val << " ";
-            push(val);
-        }
-        cout << "\n";
     }
 };
 
 class Task5_3 {
 public:
     int run() {
-        cout << "Задание 5.3 — Список + Стек/Очередь\n\n";
-
-        // --- Демонстрация списка ---
-        List<int> lst;
-        lst.push_back(1);
-        lst.push_back(2);
-        lst.push_back(3);
-        lst.push_back(2);
-
-        cout << "Список до вставки: ";
-        lst.print();
-
-        lst.insertAfterEach(2, 99);
-
-        cout << "Список после вставки 99 после каждого 2: ";
-        lst.print();
-
-        // --- Демонстрация стека ---
+        cout << "\n\nЗадание 5.3 Список + Стек/Очередь\n\n";
+        // СТЕК
         Stack<int> st;
         st.push(1);
         st.push(2);

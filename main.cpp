@@ -28,11 +28,11 @@ int main() {
     // Task4_5 t4_5;
     // t4_5.run();
 
-    // Task5_2 t5_2;
-    // return t5_2.run();
+    Task5_2 t5_2;
+    t5_2.run();
 
-    // Task5_2_smart t5_2_smart;
-    // return t5_2_smart.run();
+    Task5_2_smart t5_2_smart;
+    t5_2_smart.run();
 
     Task5_3 t5_3;
     return t5_3.run();
